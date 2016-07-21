@@ -5,15 +5,15 @@
 1. Mainly use the basic fullpage function.
 2. Use lazyload 
 like 
-'''<img data-src="image.png">
+```<img data-src="image.png">
 <video>
     <source data-src="video.webm" type="video/webm" />
     <source data-src="video.mp4" type="video/mp4" />
 </video>
-'''<audio data-autoplay>
+```<audio data-autoplay>
     <source src="http://metakoncept.hr/horse.ogg" type="audio/ogg">
 </audio>
-'''<audio data-keepplaying>
+```<audio data-keepplaying>
     <source src="http://metakoncept.hr/horse.ogg" type="audio/ogg">
 </audio>
 3. use the attribute:
