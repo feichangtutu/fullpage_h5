@@ -6,28 +6,135 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
-    <title>我的北京下雨了</title>
+    <title>我在北方看海 你还好吗</title>
     <style>
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            border: 0px;
+            width: 100%;
+            height: 100%;
+            background: #EDEDED;
+        }
+
         @media screen and (min-width: 641px) {
             body {
                 width: 640px;
                 margin: 0 auto;
             }
         }
+
         @media screen and (max-width: 640px) {
             body {
                 width: 100%;
             }
         }
+
         .section img {
             width: 100%;
             height: 100%;
         }
-        #icon{
+
+        #icon {
             width: 30px;
         }
+
+        .loading {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1010;
+            width: 100%;
+            color: #333333;
+            height: 100%;
+            background: #fff;
+        }
+
+        .progress {
+            margin: 20px;
+            margin-top: 80%;
+            height: 8px;
+            position: relative;
+        }
+
+        @keyframes rotating {
+            from {
+                transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes rotating /* Safari and Chrome */
+        {
+            from {
+                transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -webkit-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -webkit-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+            }
+        }
+
+        .rotating {
+            -webkit-animation: rotating 2s linear infinite;
+            -moz-animation: rotating 2s linear infinite;
+            -ms-animation: rotating 2s linear infinite;
+            -o-animation: rotating 2s linear infinite;
+            animation: rotating 2s linear infinite;
+            transform-origin: 50% 50%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #scratchcard {
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1001;
+            width: 100%;
+            color: #333333;
+            height: 100%;
+            /* background: #FFFFFF; */
+            height: 100%;
+        }
+        .section{
+            position: relative;
+        }
+        .focus_link{
+        		position: absolute;
+        		bottom: 0;
+        		width: 100%;
+        		height: 50px;
+        }
+        .focus_link a{
+            display: block;
+            width: 100%;
+            height: 50px;
+        }
+
     </style>
-    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.min.css"/>
 
     <script src="http://8mbang-common.oss-cn-beijing.aliyuncs.com/js/jquery.min.js"></script>
 
@@ -38,116 +145,227 @@
     <script type="text/javascript" src="js/scrolloverflow.min.js"></script>
 
     <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
-    <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+    <script type="text/javascript" src="js/progressbar.min.js"></script>
+    <script src="js/preloadjs-NEXT.min.js"></script>
 </head>
 <body style="position: relative;">
+<div class="loading">
+    <div id="progress" class="progress"></div>
+</div>
+<div id="scratchcard">
 
-<div style="position: absolute;top: 10px;right: 10px;z-index: 1000">
+</div>
+<div style="position: absolute;top: 10px;right: 10px;z-index: 1000;padding-left:10px;padding-bottom:10px;">
     <span onclick="changeMusic()">
         <img id="icon" src="images/open.png" alt=""/>
     </span>
 </div>
 <!--<div id="up" style="position: absolute;bottom: 10px;left: 50%;z-index: 1000">-->
-    <!--<img src="images/up.png" alt=""/>-->
+<!--<img src="images/up.png" alt=""/>-->
 <!--</div>-->
-<!--<audio preload="preload" autoplay="autoplay" loop="loop"-->
-       <!--src="music.mp3" id="music"></audio>-->
-<audio data-autoplay loop="loop" preload="preload" id="music">
-    <source src="music.mp3" type="audio/ogg">
-</audio>
+<audio preload="preload" loop="loop"
+src="music.mp3" id="music"></audio>
+<!--<audio loop="loop" preload="preload" id="music">-->
+    <!--<source src="music.mp3" type="audio/ogg">-->
+<!--</audio>-->
 
 <div id="fullpage">
-
-    <div class="section">
+    <div class="section" data-anchor = "page1">
         <img id="pic1" src="" data-src="images/1.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+    	        <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page2">
         <img id="pic2" src="" data-src="images/2.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page3">
         <img id="pic3" src="" data-src="images/3.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page4">
         <img id="pic4" src="" data-src="images/4.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page5">
         <img id="pic5" src="" data-src="images/5.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page6">
         <img id="pic6" src="" data-src="images/6.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page7">
         <img id="pic7" src="" data-src="images/7.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page8">
         <img id="pic8" src="" data-src="images/8.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page9">
         <img id="pic9" src="" data-src="images/9.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page10">
         <img id="pic10" src="" data-src="images/10.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page11">
         <img id="pic11" src="" data-src="images/11.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page12">
         <img id="pic12" src="" data-src="images/12.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
     </div>
-    <div class="section">
+    <div class="section" data-anchor = "page13">
         <img id="pic13" src="" data-src="images/13.jpg">
+        <div class="focus_link" data-menuanchor="focus_page">
+            <a href="#focus_page"></a>
+        </div>
+    </div>
+    <div id="focus" class="section" data-anchor = "focus_page">
+        <img id="pic14" src="" data-src="images/guanzhu.jpg">
     </div>
 </div>
-
+<script src="js/scratchcard.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#fullpage').fullpage({
-            continuousVertical: true
-        });
-    });
-    function init() {
-//        preload
-        var queue = new createjs.LoadQueue();
-        queue.installPlugin(createjs.Sound);
-        queue.on("complete", handleComplete, this);
-//        queue.loadFile({id:"music", src:"./music.mp3"});
-        queue.loadManifest([
-            {id: "pic1", src:"images/1.jpg"},
-            {id: "pic2", src:"images/2.jpg"},
-            {id: "pic3", src:"images/3.jpg"},
-            {id: "pic4", src:"images/4.jpg"},
-            {id: "pic5", src:"images/5.jpg"},
-            {id: "pic6", src:"images/6.jpg"},
-            {id: "pic7", src:"images/7.jpg"},
-            {id: "pic8", src:"images/8.jpg"},
-            {id: "pic9", src:"images/9.jpg"},
-            {id: "pic10", src:"images/10.jpg"},
-            {id: "pic11", src:"images/11.jpg"},
-            {id: "pic12", src:"images/12.jpg"},
-            {id: "pic13", src:"images/13.jpg"}
-        ]);
-        function handleComplete() {
-
-        }
-    }
-
     var open = true;
     function changeMusic() {
         if (open) {
-            music.play();
-            $("#icon").attr('src','images/open.png');
+            document.querySelector("#music").play()
+            $("#icon").attr('src', 'images/open.png');
         } else {
-            music.pause();
-            $("#icon").attr('src','images/close.png');
+            document.querySelector("#music").pause()
+            $("#icon").attr('src', 'images/close.png');
 
         }
         open = !open;
     }
-    changeMusic();
+    window.onload = function onLoad() {
+        window.bar = new ProgressBar.Line(".progress", {
+            strokeWidth: 4,
+            easing: 'easeInOut',
+//            duration: 30000,
+            color: '#89A5BA',
+            trailColor: '#eee',
+            trailWidth: 1,
+            svgStyle: {width: '100%', height: '100%'},
+            text: {
+                style: {
+                    // Text color.
+                    // Default: same as stroke color (options.color)
+                    color: '#89A9B9',
+                    position: 'absolute',
+                    right: '0',
+                    top: '30px',
+                    padding: 0,
+                    margin: 0,
+                    transform: null
+                },
+                autoStyleContainer: false
+            },
+            from: {color: '#89A5BA'},
+            to: {color: '#89A5BA'},
+            step: function (state, bar) {
+                bar.setText(Math.round(bar.value() * 100) + ' %');
+            }
+        });
+        function init() {
+            var queue = new createjs.LoadQueue();
+            queue.installPlugin(createjs.Sound);
+            queue.on("complete", handleComplete, this);
+            queue.loadFile({id:"music", src:"./music.mp3"});
+            queue.loadManifest([
+                {id: "pic1", src: "images/1.jpg"},
+                {id: "pic2", src: "images/2.jpg"},
+                {id: "pic3", src: "images/3.jpg"},
+                {id: "pic4", src: "images/4.jpg"},
+                {id: "pic5", src: "images/5.jpg"},
+                {id: "pic6", src: "images/6.jpg"},
+                {id: "pic7", src: "images/7.jpg"},
+                {id: "pic8", src: "images/8.jpg"},
+                {id: "pic9", src: "images/9.jpg"},
+                {id: "pic10", src: "images/10.jpg"},
+                {id: "pic11", src: "images/11.jpg"},
+                {id: "pic12", src: "images/12.jpg"},
+                {id: "pic13", src: "images/13.jpg"},
+                {id: "pic13", src: "images/chuanglian.jpg"},
+                {id: "pic14", src: "images/guanzhu.jpg"}
+            ]);
+            function handleComplete() {
+                window.bar.animate(1.0, function () {
+                    $(".loading").hide();
+                    $('#fullpage').fullpage({
+                        continuousVertical: true
+                    });
+                    $("#fullpage").hide();
 
-    init();
+                    window.bar.destroy();
+
+
+                });
+
+            }
+        }
+        var coustomSwitch = false;
+        /**
+         * 刮刮卡组件
+         */
+        scratchCard.init({
+            el: "scratchcard",
+            scrapeWidth: "",
+            scrapeHeight: "",
+//            scrapePrizeUrl:prizeImg,
+            /**
+             * 开始刮执行的动作
+             */
+            scrapeUp: function () {
+                $("#fullpage").show();
+            },
+            scrapeEnd: function () {
+                //清除自己
+                changeMusic();
+                $("#scratchcard").remove();
+            },
+            scrapeDiameter: "",//直径
+            scrapeCoverUrl: "images/chuanglian.jpg",
+            fillColor: "#999",
+            coustomSwitch: coustomSwitch
+        })
+
+//        changeMusic();
+
+        init();
+    };
+
+
 </script>
-<!--<script type="text/javascript" src="http://tajs.qq.com/stats?sId=45788002" charset="UTF-8"></script>-->
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=45788002" charset="UTF-8"></script>
 
 <script type="text/javascript">var config = {};</script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>

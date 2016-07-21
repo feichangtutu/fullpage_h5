@@ -7,8 +7,8 @@ var getImgUrl = function (src) {
     return img.src;
 }
 
-var shareUrl = "http://dev.8mbang.com/721/index.html";
-var sharePic = 'http://go.codevm.com/2016/0607/images/share.png';
+var shareUrl = "http://go.codevm.com/2016/0721/";
+var sharePic = 'http://go.codevm.com/2016/0721/images/sharelogo.png';
 var shareTitle = '我在北方看海，你还好吗';
 var shareText = '我的北京下雨了';
 
