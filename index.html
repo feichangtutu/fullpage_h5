@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-with,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>我的北京下雨了</title>
+    <style>
+        @media screen and (min-width: 641px) {
+            body {
+                width: 640px;
+                margin: 0 auto;
+            }
+        }
+        @media screen and (max-width: 640px) {
+            body {
+                width: 100%;
+            }
+        }
+        .section img {
+            width: 100%;
+            height: 100%;
+        }
+        #icon{
+            width: 30px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.min.css" />
+
+    <script src="http://8mbang-common.oss-cn-beijing.aliyuncs.com/js/jquery.min.js"></script>
+
+    <!-- This following line is optional. Only necessary if you use the option css3:false and you want to use other easing effects rather than "linear", "swing" or "easeInOutCubic". -->
+    <script src="js/jquery.easings.min.js"></script>
+
+    <!-- This following line is only necessary in the case of using the plugin option `scrollOverflow:true` -->
+    <script type="text/javascript" src="js/scrolloverflow.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
+    <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+</head>
+<body style="position: relative;">
+
+<div style="position: absolute;top: 10px;right: 10px;z-index: 1000">
+    <span onclick="changeMusic()">
+        <img id="icon" src="images/open.png" alt=""/>
+    </span>
+</div>
+<!--<div id="up" style="position: absolute;bottom: 10px;left: 50%;z-index: 1000">-->
+    <!--<img src="images/up.png" alt=""/>-->
+<!--</div>-->
+<!--<audio preload="preload" autoplay="autoplay" loop="loop"-->
+       <!--src="music.mp3" id="music"></audio>-->
+<audio data-autoplay loop="loop" preload="preload" id="music">
+    <source src="music.mp3" type="audio/ogg">
+</audio>
+
+<div id="fullpage">
+
+    <div class="section">
+        <img id="pic1" src="" data-src="images/1.jpg">
+    </div>
+    <div class="section">
+        <img id="pic2" src="" data-src="images/2.jpg">
+    </div>
+    <div class="section">
+        <img id="pic3" src="" data-src="images/3.jpg">
+    </div>
+    <div class="section">
+        <img id="pic4" src="" data-src="images/4.jpg">
+    </div>
+    <div class="section">
+        <img id="pic5" src="" data-src="images/5.jpg">
+    </div>
+    <div class="section">
+        <img id="pic6" src="" data-src="images/6.jpg">
+    </div>
+    <div class="section">
+        <img id="pic7" src="" data-src="images/7.jpg">
+    </div>
+    <div class="section">
+        <img id="pic8" src="" data-src="images/8.jpg">
+    </div>
+    <div class="section">
+        <img id="pic9" src="" data-src="images/9.jpg">
+    </div>
+    <div class="section">
+        <img id="pic10" src="" data-src="images/10.jpg">
+    </div>
+    <div class="section">
+        <img id="pic11" src="" data-src="images/11.jpg">
+    </div>
+    <div class="section">
+        <img id="pic12" src="" data-src="images/12.jpg">
+    </div>
+    <div class="section">
+        <img id="pic13" src="" data-src="images/13.jpg">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#fullpage').fullpage({
+            continuousVertical: true
+        });
+    });
+    function init() {
+//        preload
+        var queue = new createjs.LoadQueue();
+        queue.installPlugin(createjs.Sound);
+        queue.on("complete", handleComplete, this);
+//        queue.loadFile({id:"music", src:"./music.mp3"});
+        queue.loadManifest([
+            {id: "pic1", src:"images/1.jpg"},
+            {id: "pic2", src:"images/2.jpg"},
+            {id: "pic3", src:"images/3.jpg"},
+            {id: "pic4", src:"images/4.jpg"},
+            {id: "pic5", src:"images/5.jpg"},
+            {id: "pic6", src:"images/6.jpg"},
+            {id: "pic7", src:"images/7.jpg"},
+            {id: "pic8", src:"images/8.jpg"},
+            {id: "pic9", src:"images/9.jpg"},
+            {id: "pic10", src:"images/10.jpg"},
+            {id: "pic11", src:"images/11.jpg"},
+            {id: "pic12", src:"images/12.jpg"},
+            {id: "pic13", src:"images/13.jpg"}
+        ]);
+        function handleComplete() {
+
+        }
+    }
+
+    var open = true;
+    function changeMusic() {
+        if (open) {
+            music.play();
+            $("#icon").attr('src','images/open.png');
+        } else {
+            music.pause();
+            $("#icon").attr('src','images/close.png');
+
+        }
+        open = !open;
+    }
+    changeMusic();
+
+    init();
+</script>
+<!--<script type="text/javascript" src="http://tajs.qq.com/stats?sId=45788002" charset="UTF-8"></script>-->
+
+<script type="text/javascript">var config = {};</script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://go.codevm.com/js"></script>
+<script type="text/javascript" src="js/wx_share_new.js"></script>
+</body>
+</html>
